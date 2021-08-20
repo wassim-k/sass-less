@@ -1,0 +1,36 @@
+{
+  "name": "@integration/angular",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "ng": "ng",
+    "start": "yarn copy && ng serve",
+    "build": "ng build",
+    "lint": "ng lint",
+    "serve:inspect": "yarn copy && node --inspect-brk ./node_modules/@angular/cli/bin/ng serve",
+    "copy": "node ../../scripts/copy.js ../../packages/sass-less-importer ./node_modules"
+  },
+  "dependencies": {
+    "@angular/animations": "~12.1.0",
+    "@angular/cdk": "12.1.0",
+    "@angular/common": "~12.1.0",
+    "@angular/compiler": "~12.1.0",
+    "@angular/core": "~12.1.0",
+    "@angular/flex-layout": "^12.0.0-beta.34",
+    "@angular/forms": "~12.1.0",
+    "@angular/platform-browser": "~12.1.0",
+    "@angular/platform-browser-dynamic": "~12.1.0",
+    "@angular/router": "~12.1.0",
+    "ng-zorro-antd": "^12.0.1",
+    "rxjs": "~6.5.5",
+    "tslib": "^2.2.0",
+    "zone.js": "~0.11.4"
+  },
+  "devDependencies": {
+    "@angular-builders/custom-webpack": "^12.0.0",
+    "@angular-devkit/build-angular": "~12.1.0",
+    "@angular/cli": "~12.1.0",
+    "@angular/compiler-cli": "~12.1.0",
+    "@angular/language-service": "~12.1.0"
+  }
+}

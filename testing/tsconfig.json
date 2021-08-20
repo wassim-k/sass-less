@@ -1,0 +1,23 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es2017",
+    "module": "esnext",
+    "declaration": false,
+    "paths": {
+      "sass-less-importer": [
+        "../packages/sass-less-importer/src/index.ts"
+      ],
+      "less-scss-importer": [
+        "../packages/less-scss-importer/src/index.ts"
+      ],
+      "@webpack-utils": [
+        "../packages/webpack-utils/src/index.ts"
+      ]
+    },
+    "types": [
+      "jest"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "name": "sass-less-importer",
+  "description": "@import less variables from sass",
+  "version": "0.1.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wassim-k/sass-less.git"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "webpack",
+    "less",
+    "sass",
+    "scss",
+    "variables",
+    "importer",
+    "sass-importer",
+    "sass-loader",
+    "angular",
+    "react"
+  ],
+  "scripts": {
+    "build": "tsc -b ./tsconfig.json && yarn copy-refs",
+    "copy-refs": "node ../../scripts/ts-copy-references tsconfig.json",
+    "clean": "rimraf dist",
+    "prebuild": "yarn clean"
+  },
+  "dependencies": {
+    "less": "^3.5.0",
+    "loader-utils": "^2.0.0",
+    "semver": "^7.3.2"
+  },
+  "devDependencies": {
+    "@types/less": "^3.0.1",
+    "@types/loader-utils": "^2.0.1",
+    "@types/sass-loader": "^8.0.0",
+    "@types/semver": "^7.3.3",
+    "@types/webpack": "^4.41.21"
+  }
+}

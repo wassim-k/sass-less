@@ -1,0 +1,6 @@
+@use "./colors" as *;
+
+.test-scss {
+  background-color: $crimson-1;
+  border-color: $crimson-2;
+}

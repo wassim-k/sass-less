@@ -1,0 +1,14 @@
+@use "./theme" as *;
+
+body {
+  background-color: $color-1;
+  color: $color-2;
+}
+
+.app-container {
+  text-align: center;
+
+  h1 {
+    font-family: "Calibri";
+  }
+}

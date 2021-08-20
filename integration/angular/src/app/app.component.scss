@@ -1,0 +1,11 @@
+@use "~@angular/flex-layout/mq" as *;
+@use "src/styles/variables" as *; // <= MAGIC
+
+h1 {
+  color: $success-color;
+  background-color: $primary-color;
+
+  @include layout-bp(gt-sm) {
+    color: $text-color-secondary;
+  }
+}

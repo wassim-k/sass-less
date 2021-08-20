@@ -1,0 +1,17 @@
+{
+  "name": "@internal/webpack-utils",
+  "description": "webpack config update utilities",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json",
+    "clean": "rimraf dist .cache",
+    "prebuild": "yarn clean"
+  },
+  "devDependencies": {
+    "@types/webpack": "^4.41.21"
+  }
+}

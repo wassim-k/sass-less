@@ -1,0 +1,36 @@
+{
+  "name": "sass-less",
+  "private": true,
+  "description": "SASS/LESS integration",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "lerna run build --scope less-scss-importer --scope sass-less-importer",
+    "test": "jest --config ./testing/jest.config.js --no-watchman --detectOpenHandles",
+    "clean": "lerna run clean"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "integration/*",
+      "testing"
+    ],
+    "nohoist": [
+      "**/@angular*/**"
+    ]
+  },
+  "devDependencies": {
+    "@octokit/core": "^3.4.0",
+    "@types/node": "^12.0.0",
+    "@types/rimraf": "^3.0.0",
+    "lerna": "^3.22.1",
+    "less-loader": "7.0.0",
+    "less": "^3.5.0",
+    "rimraf": "^3.0.2",
+    "sass-loader": "^10.0.0",
+    "sass": "^1.26.10",
+    "tslib": "^2.0.1",
+    "typescript": "~4.2.3",
+    "webpack": "^4.0.0"
+  }
+}

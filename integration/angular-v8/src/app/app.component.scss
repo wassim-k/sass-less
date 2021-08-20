@@ -1,0 +1,6 @@
+@import "src/styles/variables"; // <= MAGIC
+
+h1 {
+  color: $success-color;
+  background-color: $primary-color;
+}

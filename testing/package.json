@@ -1,0 +1,24 @@
+{
+  "name": "testing",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^26.0.10",
+    "@types/less": "^3.0.1",
+    "@types/loader-utils": "^2.0.1",
+    "@types/sass-loader": "^8.0.0",
+    "@types/semver": "^7.3.3",
+    "@types/webpack": "^4.41.21",
+    "css-loader": "^4.2.2",
+    "jest": "^26.4.2",
+    "less": "^3.5.0",
+    "loader-utils": "^2.0.0",
+    "raw-loader": "^4.0.1",
+    "sass": "^1.26.10",
+    "semver": "^7.3.2",
+    "style-loader": "^1.2.1",
+    "ts-jest": "^26.3.0",
+    "ts-loader": "^8.0.3"
+  }
+}
