@@ -1,5 +1,6 @@
 const { configureLessImporterForSass } = require('sass-less-importer');
 
 module.exports = (config) => {
-  return configureLessImporterForSass(config);
+  const newConfig = configureLessImporterForSass(config);
+  return newConfig;
 };

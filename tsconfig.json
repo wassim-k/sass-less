@@ -1,0 +1,14 @@
+{
+    "files": [],
+    "references": [
+        {
+            "path": "./packages/less-scss-importer"
+        },
+        {
+            "path": "./packages/sass-less-importer"
+        },
+        {
+            "path": "./packages/webpack-utils"
+        }
+    ]
+}

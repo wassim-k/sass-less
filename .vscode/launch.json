@@ -21,6 +21,7 @@
       "args": [
         "--testMatch=\"**/${relativeFile}\"",
         "--runInBand",
+        "--testTimeout=120000",
         "--config",
         "${workspaceFolder}/testing/jest.config.js"
       ],

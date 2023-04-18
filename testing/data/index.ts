@@ -1,2 +1,2 @@
-import './test.less';
-import './test.scss';
+import './less/test.less';
+import './sass/test.scss';

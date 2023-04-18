@@ -1,7 +1,7 @@
 {
   "name": "sass-less-importer",
   "description": "@import less variables from sass",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "license": "MIT",
@@ -33,14 +33,9 @@
   },
   "dependencies": {
     "less": "^3.5.0",
-    "loader-utils": "^2.0.0",
-    "semver": "^7.3.2"
+    "loader-utils": "^2.0.0"
   },
   "devDependencies": {
-    "@types/less": "^3.0.1",
-    "@types/loader-utils": "^2.0.1",
-    "@types/sass-loader": "^8.0.0",
-    "@types/semver": "^7.3.3",
-    "@types/webpack": "^4.41.21"
+    "@types/loader-utils": "^2.0.1"
   }
 }

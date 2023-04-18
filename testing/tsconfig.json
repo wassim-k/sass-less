@@ -2,9 +2,9 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "es2017",
+    "target": "es2020",
     "module": "esnext",
-    "declaration": false,
+    "sourceMap": true,
     "paths": {
       "sass-less-importer": [
         "../packages/sass-less-importer/src/index.ts"
@@ -12,12 +12,13 @@
       "less-scss-importer": [
         "../packages/less-scss-importer/src/index.ts"
       ],
-      "@webpack-utils": [
+      "@internal/webpack-utils": [
         "../packages/webpack-utils/src/index.ts"
       ]
     },
     "types": [
-      "jest"
+      "node",
+      "less"
     ]
   }
 }

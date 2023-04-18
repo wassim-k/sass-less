@@ -1,4 +1,5 @@
-import { Result } from 'sass';
+import { CompileResult } from 'sass';
+import { fileURLToPath } from 'url';
 import { extractScssVariables } from './extractScssVariables';
 
 const { FileManager } = require('less');
@@ -51,9 +52,7 @@ class ScssFileManager extends FileManager {
 
 export function compileLessVariables(file: string, addDependency: AddDependency) {
 
-    const callback = (result: Result) => {
-        result.stats.includedFiles.forEach(addDependency);
-    };
+    const callback = (result: CompileResult) => result.loadedUrls.map(url => fileURLToPath(url)).forEach(addDependency);
 
     addDependency(file);
 

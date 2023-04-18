@@ -1,5 +1,5 @@
 export * from './memoize';
-import type { RuleSetLoader, RuleSetQuery, RuleSetRule, RuleSetUse, RuleSetUseItem } from 'webpack';
+import type { RuleSetRule, RuleSetUse, RuleSetUseItem } from 'webpack';
 
 export function appendLoader(rule: RuleSetRule, useItem: RuleSetUseItem): RuleSetRule {
   return processLoader(rule, {
@@ -10,7 +10,7 @@ export function appendLoader(rule: RuleSetRule, useItem: RuleSetUseItem): RuleSe
 export function modifyLoader(
   rule: RuleSetRule,
   loaderName: string,
-  modify: (useItem: string | RuleSetLoader) => RuleSetUseItem,
+  modify: (useItem: RuleSetUseItem) => RuleSetUseItem,
   strict?: boolean
 ): RuleSetRule {
   return processLoader(rule, {
@@ -23,19 +23,23 @@ export function modifyLoader(
 export function modifyLoaderOptions(
   rule: RuleSetRule,
   loaderName: string,
-  modify: (options: RuleSetQuery | undefined) => RuleSetQuery
+  modify: (options: string | { [index: string]: any } | undefined) => string | { [index: string]: any }
 ): RuleSetRule {
   return modifyLoader(rule, loaderName, useItem => {
-    return typeof useItem === 'string'
-      ? { loader: useItem, options: modify(undefined) }
-      : { ...useItem, options: modify(useItem.options) }
+    if (typeof useItem === 'function') {
+      throw new Error('useItem of type function is not supported');
+    } else if (typeof useItem === 'string') {
+      return { loader: useItem, options: modify(undefined) };
+    } else {
+      return { ...useItem, options: modify(useItem.options) };
+    }
   });
 }
 
 export function hasLoader(rule: RuleSetRule, loaderName: string, strict?: boolean): boolean {
-  const { loader, loaders, use, oneOf, rules } = rule;
+  const { loader, use, oneOf, rules } = rule;
   return (
-    ([] as Array<any>).concat(loader ?? loaders ?? use ?? []).some(use => useItemHasLoader(loaderName, use, strict)) ||
+    ([] as Array<any>).concat(loader ?? use ?? []).some(use => useItemHasLoader(loaderName, use, strict)) ||
     ([] as Array<any>).concat(oneOf ?? rules ?? []).some(r => hasLoader(r, loaderName, strict))
   );
 }
@@ -66,11 +70,7 @@ export function processLoader(rule: RuleSetRule, { modify, append }: {
     return newUse;
   };
 
-  if (rule.loaders) {
-    return { ...rule, loaders: preprocess(rule.loaders) };
-  } else if (rule.loader) {
-    return { ...rule, loader: preprocess(rule.loader) };
-  } else if (rule.use) {
+  if (rule.use) {
     return { ...rule, use: preprocess(rule.use) };
   } else if (rule.oneOf) {
     return { ...rule, oneOf: rule.oneOf.map(r => processLoader(r, { modify, append })) };

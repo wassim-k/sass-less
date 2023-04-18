@@ -1,8 +1,8 @@
 import { normalize } from 'path';
-import type webpack from 'webpack';
+import { LoaderContext } from 'webpack';
 import { scssImporterPlugin } from './plugin';
 
-export const scssImporterPluginWebpack = (loaderContext: webpack.loader.LoaderContext): Less.Plugin => {
+export const scssImporterPluginWebpack = (loaderContext: LoaderContext<any>): Less.Plugin => {
     const { addDependency, getResolve } = loaderContext as any;
 
     const resolve = getResolve({

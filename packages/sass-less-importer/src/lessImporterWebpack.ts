@@ -1,18 +1,28 @@
 import { normalize } from 'path';
-import type webpack from 'webpack';
-import { lessImporter } from './lessImporter';
+import { LoaderContext } from 'webpack';
+import { legacyLessImporter, lessImporter } from './lessImporter';
 
-export function lessImporterWebpack(loaderContext: webpack.loader.LoaderContext) {
-  const { resourcePath, addDependency, getResolve } = loaderContext as any;
+const resolveConfig = {
+  mainFields: ['less', 'style', 'main', '...'],
+  mainFiles: ['_index', 'index', '...'],
+  extensions: ['.less'],
+};
 
-  const resolve = getResolve({
-    mainFields: ['less', 'style', 'main', '...'],
-    mainFiles: ['_index', 'index', '...'],
-    extensions: ['.less'],
-  });
-
-  // node-sass returns POSIX paths
-  const addNormalizedDependency = (file: string) => addDependency.call(loaderContext, normalize(file));
-
+export function lessImporterWebpack(loaderContext: LoaderContext<any>) {
+  const { resourcePath, getResolve } = loaderContext as any;
+  const resolve = getResolve(resolveConfig);
+  const addNormalizedDependency = getAddNormalizedDependency(loaderContext);
   return lessImporter(resourcePath, resolve, addNormalizedDependency);
+}
+
+export function legacyLessImporterWebpack(loaderContext: LoaderContext<any>) {
+  const { resourcePath, getResolve } = loaderContext as any;
+  const resolve = getResolve(resolveConfig);
+  const addNormalizedDependency = getAddNormalizedDependency(loaderContext);
+  return legacyLessImporter(resourcePath, resolve, addNormalizedDependency);
+}
+
+// node-sass returns POSIX paths
+function getAddNormalizedDependency(loaderContext: LoaderContext<any>) {
+  return (file: string) => loaderContext.addDependency(normalize(file));
 }

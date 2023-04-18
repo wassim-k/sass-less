@@ -1,8 +1,7 @@
-import semver from 'semver';
 import type webpack from 'webpack';
-import { hasLoader, memoize, modifyLoaderOptions } from '../../webpack-utils';
+import { LoaderContext } from 'webpack';
+import { hasLoader, modifyLoaderOptions } from '../../webpack-utils';
 import { scssImporterPluginWebpack } from './pluginWebpack';
-type LoaderContext = webpack.loader.LoaderContext;
 
 /**
  * Add scss-vars-loader to webpack config
@@ -14,8 +13,7 @@ export function configureScssImporterForLess(webpackConfig: webpack.Configuratio
     module: {
       ...webpackConfig.module,
       rules: rules.map(rule => {
-        if (hasLoader(rule, 'less-loader')) {
-          if (!isVersion6()) throw new Error('less-scss-importer plugin is only compatible with less-loader vesion 6.0.0 or above.');
+        if (typeof rule !== 'string' && hasLoader(rule, 'less-loader')) {
           return modifyLessLoaderOptions(rule);
         } else {
           return rule;
@@ -34,7 +32,7 @@ function modifyLessLoaderOptions(rule: webpack.RuleSetRule): webpack.RuleSetRule
     const lessOptions = options.lessOptions ?? {};
     return {
       ...options,
-      lessOptions: (loaderContext: LoaderContext) => {
+      lessOptions: (loaderContext: LoaderContext<any>) => {
         const currentLessOptions: Less.Options = typeof lessOptions === 'function' ? lessOptions(loaderContext) : lessOptions;
         const plugins = (currentLessOptions.plugins ?? []).concat(scssImporterPluginWebpack(loaderContext));
         return { ...currentLessOptions, plugins };
@@ -42,9 +40,3 @@ function modifyLessLoaderOptions(rule: webpack.RuleSetRule): webpack.RuleSetRule
     };
   });
 }
-
-// lessOptions as a function was introduced in version 6.0.0 of less-loader
-const isVersion6 = memoize(() => {
-  const lessLoaderPackage = require('less-loader/package.json');
-  return semver.gte(lessLoaderPackage.version, '6.0.0');
-});

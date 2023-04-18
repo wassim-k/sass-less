@@ -1,4 +1,5 @@
 import { memoize } from '@internal/webpack-utils';
+import { describe, expect, it } from '@jest/globals';
 
 describe('memoize', () => {
   it(`only calls the function once`, async () => {

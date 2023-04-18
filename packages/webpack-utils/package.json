@@ -10,8 +10,5 @@
     "build": "tsc -p ./tsconfig.json",
     "clean": "rimraf dist .cache",
     "prebuild": "yarn clean"
-  },
-  "devDependencies": {
-    "@types/webpack": "^4.41.21"
   }
 }

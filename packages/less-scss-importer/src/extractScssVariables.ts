@@ -1,16 +1,15 @@
 import fs from 'fs';
-import pify from 'pify';
-import sass, { Result } from 'sass';
+import sass, { CompileResult } from 'sass';
 const gonzales = require('gonzales-pe');
 
-export async function extractScssVariables(file: string, callback: (result: Result) => void) {
+export async function extractScssVariables(file: string, callback: (result: CompileResult) => void) {
   const selector = '__VARIABLES__';
   const scssText = fs.readFileSync(file, 'utf-8');
   const variables = parseVariables(scssText);
   const rules = variables.map(variable => `${variable}: $${variable};`);
   const block = `${selector}{${rules.join('\n')}}`;
   const data = [scssText, block].join('\n');
-  const result = await pify(sass.render)({ file, data });
+  const result = sass.compileString(data);
   const css = result.css.toString();
   callback(result);
   return extractCssDeclerations(css, selector)

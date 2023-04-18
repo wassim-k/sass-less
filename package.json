@@ -7,7 +7,10 @@
   "scripts": {
     "build": "lerna run build --scope less-scss-importer --scope sass-less-importer",
     "test": "jest --config ./testing/jest.config.js --no-watchman --detectOpenHandles",
-    "clean": "lerna run clean"
+    "clean": "lerna run clean",
+    "packages:version": "lerna version --no-push --no-changelog --no-git-tag-version --no-private",
+    "prepackages:publish": "yarn build",
+    "packages:publish": "lerna publish --no-private from-package"
   },
   "workspaces": {
     "packages": [
@@ -20,17 +23,18 @@
     ]
   },
   "devDependencies": {
-    "@octokit/core": "^3.4.0",
-    "@types/node": "^12.0.0",
-    "@types/rimraf": "^3.0.0",
-    "lerna": "^3.22.1",
-    "less-loader": "7.0.0",
-    "less": "^3.5.0",
-    "rimraf": "^3.0.2",
-    "sass-loader": "^10.0.0",
-    "sass": "^1.26.10",
-    "tslib": "^2.0.1",
-    "typescript": "~4.2.3",
-    "webpack": "^4.0.0"
+    "@octokit/core": "^4.2.0",
+    "@types/node": "^18.15.11",
+    "@types/rimraf": "^3.0.2",
+    "@types/sass-loader": "^8.0.4",
+    "lerna": "^6.6.1",
+    "less": "^4.1.3",
+    "less-loader": "11.1.0",
+    "rimraf": "^5.0.0",
+    "sass": "^1.62.0",
+    "sass-loader": "^13.2.2",
+    "tslib": "^2.5.0",
+    "typescript": "~4.9.4",
+    "webpack": "^5.79.0"
   }
 }
